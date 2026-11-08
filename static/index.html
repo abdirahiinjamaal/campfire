@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>campfire — your phones are the band</title>
+<meta name="description" content="One link turns every phone in the room into a synchronized drum circle. No app, no account.">
+<meta name="theme-color" content="#0e0a0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23ffd9a0'/%3E%3Cstop offset='.55' stop-color='%23ff7a3c'/%3E%3Cstop offset='1' stop-color='%238c2b12'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='55' r='38' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body class="landing">
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<main class="wrap">
+  <div class="logo"><span class="flame"></span> campfire</div>
+  <h1>Your phones<br>are <span class="accent">the band.</span></h1>
+  <p class="sub">One link turns every phone in the room into a synchronized drum circle. Tap together, sound together.</p>
+  <button id="start" class="start">Start a circle</button>
+  <form id="joinForm" class="joinrow" autocomplete="off">
+    <input id="codeInput" placeholder="ROOM CODE" maxlength="8" spellcheck="false" aria-label="Room code">
+    <button type="submit" class="ghost">Join</button>
+  </form>
+  <ul class="facts">
+    <li>No app</li>
+    <li>No account</li>
+    <li>2–32 phones</li>
+  </ul>
+  <p class="foot">ephemeral rooms · shared beat · zero setup</p>
+</main>
+<script>
+  const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const makeCode = () => Array.from({ length: 4 }, () => CHARS[Math.floor(Math.random() * CHARS.length)]).join("");
+  const go = (code) => { location.href = "/r/" + code; };
+
+  document.getElementById("start").addEventListener("click", () => go(makeCode()));
+
+  const form = document.getElementById("joinForm");
+  const input = document.getElementById("codeInput");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const code = input.value.trim().toUpperCase();
+    if (/^[A-Z0-9]{3,8}$/.test(code)) {
+      go(code);
+    } else {
+      input.classList.remove("bad");
+      void input.offsetWidth;
+      input.classList.add("bad");
+      input.focus();
+    }
+  });
+</script>
+</body>
+</html>

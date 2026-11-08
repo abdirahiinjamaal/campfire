@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>campfire</title>
+<meta name="theme-color" content="#0e0a0a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23ffd9a0'/%3E%3Cstop offset='.55' stop-color='%23ff7a3c'/%3E%3Cstop offset='1' stop-color='%238c2b12'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='55' r='38' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body class="room">
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="app">
+  <header class="top">
+    <div class="brand"><span class="flame"></span> campfire</div>
+    <div class="room-actions">
+      <button id="codeChip" class="chip" title="Show invite QR">ROOM <b id="code">----</b></button>
+      <button id="invite" class="chip primary">Invite</button>
+    </div>
+  </header>
+
+  <section class="presence">
+    <div id="players" class="players"></div>
+    <div id="count" class="count">1 here</div>
+  </section>
+
+  <div id="steps" class="steps" aria-hidden="true"></div>
+
+  <main id="pads" class="pads">
+    <button class="pad" data-inst="0"><span>Kick</span><small>1</small></button>
+    <button class="pad" data-inst="1"><span>Snare</span><small>2</small></button>
+    <button class="pad" data-inst="2"><span>Hat</span><small>3</small></button>
+    <button class="pad" data-inst="3"><span>Clap</span><small>4</small></button>
+    <button class="pad" data-inst="4"><span>Tom</span><small>5</small></button>
+    <button class="pad" data-inst="5"><span>Zap</span><small>6</small></button>
+  </main>
+
+  <footer class="hintbar">
+    <span>Tap a pad — everyone hears it on the beat.</span>
+    <span id="status" class="status"></span>
+  </footer>
+</div>
+
+<div id="invitePanel" class="overlay gone">
+  <div class="card invite-card">
+    <h2>Bring people in</h2>
+    <p class="dim">Point a phone camera at the code</p>
+    <img id="qr" alt="QR code for this room" width="220" height="220">
+    <div class="linkrow">
+      <input id="shareLink" readonly aria-label="Room link">
+      <button id="copyBtn">Copy</button>
+    </div>
+    <button id="closeInvite" class="ghost">Close</button>
+  </div>
+</div>
+
+<div id="join" class="overlay">
+  <div class="card">
+    <div class="logo"><span class="flame"></span> campfire</div>
+    <p class="tagline">Your phones are the band.<br>Tap to join the circle.</p>
+    <label class="field">
+      <span>Your name</span>
+      <input id="name" maxlength="16" autocomplete="off" spellcheck="false">
+    </label>
+    <button id="joinBtn" class="join-btn">Join the circle</button>
+    <p class="fine">No account. No app. Just sound.</p>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
